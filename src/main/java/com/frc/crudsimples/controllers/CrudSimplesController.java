@@ -17,11 +17,13 @@ import java.util.List;
 
 public class CrudSimplesController {
 
+    //Construtor, utilizado no lugar de autowired para fazer a injeção das dependencias do Service
     final CrudSimplesService crudSimplesService;
 
     public CrudSimplesController(CrudSimplesService crudSimplesService) {
         this.crudSimplesService = crudSimplesService;
     }
+    //Fim do construtor
 
     @PostMapping
     public ResponseEntity<Object> savePessoa(@RequestBody @Valid CrudSimplesDto crudSimplesDto){
