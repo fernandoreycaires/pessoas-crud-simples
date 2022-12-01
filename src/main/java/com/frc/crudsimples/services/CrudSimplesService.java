@@ -11,7 +11,6 @@ import java.util.List;
 public class CrudSimplesService {
 
     //Construtor, utilizado no lugar de autowired para fazer a injeção das dependencias do repository
-
     final CrudSimplesRepository crudSimplesRepository;
 
     public CrudSimplesService(CrudSimplesRepository crudSimplesRepository){
