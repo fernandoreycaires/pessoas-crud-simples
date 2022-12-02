@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class CrudSimplesService {
@@ -25,6 +27,10 @@ public class CrudSimplesService {
 
     public List<CrudSimplesModel> findAll(){
         return crudSimplesRepository.findAll();
+    }
+
+    public Optional<CrudSimplesModel> findById(UUID id){
+        return crudSimplesRepository.findById(id);
     }
 
 

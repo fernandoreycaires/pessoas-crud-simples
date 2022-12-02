@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -35,5 +37,14 @@ public class CrudSimplesController {
     @GetMapping
     public ResponseEntity<List<CrudSimplesModel>> getAllCrudSimples(){
         return ResponseEntity.status(HttpStatus.OK).body(crudSimplesService.findAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getOnePessoa(@PathVariable(value = "id") UUID id){
+        Optional<CrudSimplesModel> crudSimplesModelOptional = crudSimplesService.findById(id);
+        if (!crudSimplesModelOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pessoa não encontrada");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(crudSimplesModelOptional.get());
     }
 }
