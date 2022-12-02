@@ -47,4 +47,14 @@ public class CrudSimplesController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(crudSimplesModelOptional.get());
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteOnePessoa(@PathVariable(value = "id") UUID id){
+        Optional<CrudSimplesModel> crudSimplesModelOptional = crudSimplesService.findById(id);
+        if (!crudSimplesModelOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pessoa não encontrada");
+        }
+        crudSimplesService.delete(crudSimplesModelOptional.get());
+        return ResponseEntity.status(HttpStatus.OK).body("Pessoa deleteda com sucesso ! ");
+    }
 }

@@ -33,5 +33,10 @@ public class CrudSimplesService {
         return crudSimplesRepository.findById(id);
     }
 
+    @Transactional
+    public void delete(CrudSimplesModel crudSimplesModel){
+        crudSimplesRepository.delete(crudSimplesModel);
+    }
+
 
 }
