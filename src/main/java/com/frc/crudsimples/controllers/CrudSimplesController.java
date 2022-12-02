@@ -57,4 +57,17 @@ public class CrudSimplesController {
         crudSimplesService.delete(crudSimplesModelOptional.get());
         return ResponseEntity.status(HttpStatus.OK).body("Pessoa deleteda com sucesso ! ");
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> UpdateOnePessoa(@PathVariable(value = "id") UUID id,
+                                                  @RequestBody @Valid CrudSimplesDto crudSimplesDto){
+        Optional<CrudSimplesModel> crudSimplesModelOptional = crudSimplesService.findById(id);
+        if (!crudSimplesModelOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pessoa não encontrada");
+        }
+        var crudSimplesModel = new CrudSimplesModel();
+        BeanUtils.copyProperties(crudSimplesDto, crudSimplesModel); //Aqui pegamos o DTO e comparamos com o Model, abaixo somente excluimos do update o que desejamos, exemplo o ID
+        crudSimplesModel.setId(crudSimplesModelOptional.get().getId());
+        return ResponseEntity.status(HttpStatus.OK).body(crudSimplesService.save(crudSimplesModel));
+    }
 }
